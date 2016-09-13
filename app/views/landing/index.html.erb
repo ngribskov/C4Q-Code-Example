@@ -1,25 +1,17 @@
 <body>
   <% @day.each do |j| %>
-  <div class="day">
+  <div class="day" id = <%=j[6]%>>
     <%= j[0].to_date %><br/>
     <%= image_tag "#{j[1]}" %><br/>
-    <div class = "lo">
-      lo
-      <%= j[2].to_i %>
+    <div class = "lo" >
+      lo <%= j[2].to_s %>
     </div>
     <div class = "hi" >
-      hi
-      <%= j[4].to_i %>
+      hi <%= j[4].to_s %>
     </div>
   </div>
   <% end %>
   <br/>
-  <!-- units: F
-  <label class="switch">
-    <input type="checkbox" value=0,1>
-    <div class="slider"></div>
-  </label>
-  C -->
   <%= react_component('TemperatureToggle',
     minTempC: @minC,
     minTempF: @minF,

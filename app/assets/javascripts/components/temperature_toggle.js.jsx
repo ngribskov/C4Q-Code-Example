@@ -6,19 +6,42 @@ var TemperatureToggle = React.createClass({
     maxTempF: React.PropTypes.array,
   },
 
-  handleClick: function(){
-    alert("Clicked");
+  getInitialState: function(){
+    return{ buttonName: "Farenheight"};
   },
 
+  doTemps: function(){
+    for (i=0;i<this.props.minTempC.length;i++){
+      if (this.state.buttonName == "Farenheight"){
+        $("#{i} .lo").text("lo "+this.props.minTempF[i]);
+        $("#{i} .hi").text("hi "+this.props.maxTempF[i]);
+      } else {
+        $("#{i} .lo").text("lo "+this.props.minTempC[i]);
+        $("#{i}+ .hi").text("hi "+this.props.maxTempC[i]);
+      }
+
+    }
+  },
+
+  handleClick: function(){
+    if (this.state.buttonName == "Farenheight") {
+    this.setState({
+      buttonName: "Celsius"
+    })} else {
+      this.setState({
+        buttonName: "Farenheight"
+      })
+    };
+    this.doTemps();
+  },
+
+
+
   render: function() {
+    buttonValue = this.state.buttonName
     return(
      <div>
-       <p>units: F</p>
-       <label className="switch" >
-         <input type="checkbox" value="test" onMouseUp= {this.handleClick()}/>
-         <div className="slider" ></div>
-       </label>
-       <p>C</p>
+       <button onClick={this.handleClick}>{buttonValue}</button>
     </div>
   )}
 });
